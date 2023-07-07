@@ -12,26 +12,39 @@
 
     <!-- form -->
     <form method="post" action="{{ route('products.store') }}" enctype="multipart/form-data">
-    
+        @csrf
+        
     <!-- 商品名 -->
         <div class="form-group">
             <label for="product_name">商品名</label>
             <input type="product_name" class="form-control" id="product_name" name="product_name" value="{{ old('product_name')}}">
+            @if($errors->has('product_name'))
+                <p>{{ $errors->first('product_name') }}</p>
+            @endif
         </div>
     <!-- メーカー -->
         <div class="form-group">
             <label for="company_name">メーカー</label>
             <input type="company_name" class="form-control" id="company_name" name="company_name" value="{{ old('company_name')}}">
+            @if($errors->has('company_name'))
+                <p>{{ $errors->first('company_name') }}</p>
+            @endif
         </div>
     <!-- 価格 -->
         <div class="form-group">
             <label for="price">価格</label>
             <input type="price" class="form-control" id="price" name="price" value="{{ old('price')}}">
+            @if($errors->has('price'))
+                <p>{{ $errors->first('price') }}</p>
+            @endif
         </div>
     <!-- 在庫数 -->
         <div class="form-group">
             <label for="stock">在庫数</label>
             <input type="stock" class="form-control" id="stock" name="stock" value="{{ old('stock')}}">
+            @if($errors->has('stock'))
+                <p>{{ $errors->first('stock') }}</p>
+            @endif
         </div>
     <!-- コメント -->
         <div class="form-group">

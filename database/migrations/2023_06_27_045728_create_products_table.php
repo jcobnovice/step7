@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('price');
             $table->integer('stock');
             $table->string('comment');
-            $table->binary('img_path');
+            $table->string('img_path');
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
         });

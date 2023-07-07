@@ -15,11 +15,12 @@ use App\Http\Controllers\CompaniesController;
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('auth');
 
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/products', [productsController::class, 'index'])->name('products.index');

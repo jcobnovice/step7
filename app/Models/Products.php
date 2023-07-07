@@ -45,15 +45,13 @@ class Products extends Model
         return $products;
     }
 
-
-
     //登録画面
-    public function createProduct($products,$file_name){
+    public function registProducts($products,$file_name){
         //登録処理
         $path = 'storage/'. $file_name;
             
             DB::table('products')->insert([
-                'company_id' => $product->company_id,
+                'company_name' => $product->company_id,
                 'product_name' =>$prduct->product_name,
                 'price' => $product->price,
                 'stock' => $product->stock,
