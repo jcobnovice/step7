@@ -30,8 +30,8 @@ class ProductsController extends Controller
     
         try {
             // 登録処理呼び出し
-            $model = new Products();
-            $model->registProducts();
+            $request = new Products();
+            $request->registProducts();
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -39,13 +39,13 @@ class ProductsController extends Controller
         }
     
         // 処理が完了したらregistにリダイレクト
-        return redirect(route('create'));
+        return redirect(route('products.create'));
     }
 
     public function create(Request $request)
     {
         //createに転送
-        return view('create');
+        return view('products.create');
     }
 
     //public function store(Request $request)

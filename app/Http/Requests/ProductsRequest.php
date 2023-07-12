@@ -28,7 +28,7 @@ class ProductsRequest extends FormRequest
             'company_name' => 'required | max:255',
             'price' => 'required | integer',
             'stock' => 'required | integer',
-            'comment' => 'txet | max:255',
+            'comment' => 'max:255',
             'img_path' => 'url',
         ];
     }
