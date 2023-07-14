@@ -25,10 +25,11 @@
     <!-- メーカー -->
         <div class="form-group">
             <label for="company_name">メーカー</label>
-            <input type="company_name" class="form-control" id="company_name" name="company_name" value="{{ old('company_name')}}">
-            @if($errors->has('company_name'))
-                <p>{{ $errors->first('company_name') }}</p>
-            @endif
+            <select class="form-control" id="company_name" name="company_name">
+            @foreach ($products as $product)
+                <option value="{{ $product->company_name }}">{{ $product->company_name }}</option>
+            @endforeach
+            </select>
         </div>
     <!-- 価格 -->
         <div class="form-group">

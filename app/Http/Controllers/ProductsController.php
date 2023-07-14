@@ -31,7 +31,7 @@ class ProductsController extends Controller
         try {
             // 登録処理呼び出し
             $request = new Products();
-            $request->registProducts();
+            $request->registProducts($products,$file_name);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -44,8 +44,9 @@ class ProductsController extends Controller
 
     public function create(Request $request)
     {
-        //createに転送
-        return view('products.create');
+        $model = new Products();
+        $products = $model->getList();
+        return view('products.create',['products' => $products]);
     }
 
     //public function store(Request $request)
@@ -76,7 +77,7 @@ class ProductsController extends Controller
     public function edit($id)
     {
         $model = products::find($id);
-        $products = $model->getEdit($id);
+        $products = $model->getDetail($id);
 
         return view('products.edit' , ['products' => $products]);
     }

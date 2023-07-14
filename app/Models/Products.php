@@ -21,7 +21,7 @@ class Products extends Model
         return $products;
     }
 
-    //詳細画面
+    //詳細画面・編集画面
     public function getDetail($id) {
         //productテーブルからデータを取得
         $products = DB::table('products')
@@ -34,16 +34,16 @@ class Products extends Model
     }
 
     //編集画面
-    public function getEdit($id) {
+    //public function getEdit($id) {
         //productテーブルからデータを取得
-        $products = DB::table('products')
-        ->join('companies', 'company_id', '=', 'companies.id')
-        ->select('products.*', 'companies.company_name')
-        ->where('products.id', '=', $id)
-        ->first();
+        //$products = DB::table('products')
+        //->join('companies', 'company_id', '=', 'companies.id')
+        //->select('products.*', 'companies.company_name')
+        //->where('products.id', '=', $id)
+        //->first();
 
-        return $products;
-    }
+        //return $products;
+    //}
 
     //登録画面
     public function registProducts($products,$file_name){
@@ -57,6 +57,8 @@ class Products extends Model
                 'stock' => $products->stock,
                 'comment' => $products->comment,
                 'img_path' => $path,
+                'created_at',
+                'updated_at',
             ]);
     }
 }
