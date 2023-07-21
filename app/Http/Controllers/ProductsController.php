@@ -13,8 +13,9 @@ class ProductsController extends Controller
     {
         $model = new Products();
         $products = $model->getList();
+        $companies = $model->getList();
 
-        return view('list' , ['products' => $products]);
+        return view('list' , ['products' => $products] , ['companies' => $companies]);
         //$query = Products::query();
         //全件取得
         //$users = $query->get();
@@ -45,8 +46,8 @@ class ProductsController extends Controller
     public function create(Request $request)
     {
         $model = new Products();
-        $products = $model->getList();
-        return view('products.create',['products' => $products]);
+        $companies = $model->getList();
+        return view('products.create',['companies' => $companies]);
     }
 
     //public function store(Request $request)

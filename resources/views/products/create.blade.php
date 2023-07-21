@@ -26,8 +26,8 @@
         <div class="form-group">
             <label for="company_name">メーカー</label>
             <select class="form-control" id="company_name" name="company_name">
-            @foreach ($products as $product)
-                <option value="{{ $product->company_name }}">{{ $product->company_name }}</option>
+            @foreach ($companies as $company)
+                <option value="{{ $company->company_name }}">{{ $company->company_name }}</option>
             @endforeach
             </select>
         </div>
@@ -59,7 +59,7 @@
         </div>
 
 
-        <input type="hidden" name="_token" value="{{csrf_token()}}">
+        <!-- input type="hidden" name="_token" value="{{csrf_token()}}" -->
 
         <div class="form-group row mb-0">
             <div class="col-sm-12">

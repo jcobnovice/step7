@@ -4,6 +4,27 @@
 <h1>商品情報一覧画面</h1>
 
 <a href="{{ route('products.create') }}" class="btn btn-primary" style="margin:20px;">新規登録</a>
+    
+    <div class="search">
+        
+        <!-- 検索フォーム -->
+        <div class="product_name.search">
+            <label for="product_name">{{ __('商品名') }}</label>
+            <input type="text" name="keyword">
+        </div>  
+
+        <div class="company_name.serch">
+            <label for="company_name">{{ __('メーカー') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
+            <select class="form-control" id="company_name" name="company_name">
+                @foreach ($companies as $company)
+                    <option value="{{ $company->company_name }}">{{ $company->company_name }}</option>
+                @endforeach
+            </select>
+        </div>
+  
+        <input type="submit" value="検索">
+        </form>
+    </div>
 
     <table class="table table-striped">
         <thead>

@@ -19,8 +19,8 @@
             <tbody>
                 <tr>
                     <td>{{ $products->id }}</td>
-                    <td>{{ $products->product_name }}</td>
-                    <td>{{ $products->company_name }}</td>
+                    <input type="text" name="product_name" value="{{ $products->product_name }}" /><br /><br />
+                    <input type="text" name="company_name" value="{{ $products->company_name }}" /><br /><br />
                     <td>{{ $products->price }}</td>
                     <td>{{ $products->stock }}</td>
                     <td>{{ $products->comment }}</td>

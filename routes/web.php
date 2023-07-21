@@ -28,4 +28,4 @@ Route::get('/create', [productsController::class, 'create'])->name('products.cre
 //Route::get('/show/{id}', [productsController::class, 'show'])->name('produsts.show');
 Route::get('/detail/{id}', [productsController::class, 'detail'])->name('products.detail');
 Route::get('/edit/{id}', [productsController::class, 'edit'])->name('products.edit');
-Route::post('/store', [productsController::class, 'store'])->name('products.store');
+Route::post('/cerate/store', [productsController::class, 'store'])->name('products.store');

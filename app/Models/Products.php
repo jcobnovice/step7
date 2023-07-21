@@ -51,14 +51,14 @@ class Products extends Model
         $path = 'storage/'. $file_name;
             
             DB::table('products')->insert([
-                'company_name' => $products->company_id,
+                'company_id' => $products->company_id,
                 'product_name' =>$prducts->product_name,
                 'price' => $products->price,
                 'stock' => $products->stock,
                 'comment' => $products->comment,
                 'img_path' => $path,
-                'created_at',
-                'updated_at',
+                'created_at' => NOW(),
+                'updated_at'=> NOW(),
             ]);
     }
 }
