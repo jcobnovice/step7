@@ -19,11 +19,11 @@
             <tbody>
                 <tr>
                     <td>{{ $products->id }}</td>
-                    <input type="text" name="product_name" value="{{ $products->product_name }}" /><br /><br />
-                    <input type="text" name="company_name" value="{{ $products->company_name }}" /><br /><br />
-                    <td>{{ $products->price }}</td>
-                    <td>{{ $products->stock }}</td>
-                    <td>{{ $products->comment }}</td>
+                    <td><input type="text" name="product_name" value="{{ $products->product_name }}" ></td>
+                    <td><input type="text" name="company_name" value="{{ $products->company_name }}" ></td>
+                    <td><input type="text" name="price" value="{{ $products->price }}" ></td>
+                    <td><input type="text" name="stock" value="{{ $products->stock }}" ></td>
+                    <td><input type="text" name="comment" value="{{ $products->comment }}" ></td>
                     <td>{{ $products->img_path }}</td>
                     <td><a href="" class="btn btn-primary">更新</a></td>
                 </tr>

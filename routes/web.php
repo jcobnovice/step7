@@ -14,18 +14,33 @@ use App\Http\Controllers\CompaniesController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Auth::routes();
-
 Route::get('/', function () {
     return view('welcome');
 })->middleware('auth');
 
+Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//商品情報画面のルーティング
 Route::get('/products', [productsController::class, 'index'])->name('products.index');
+
+//商品情報登録画面のルーティング
 Route::get('/create', [productsController::class, 'create'])->name('products.create');
-//Route::get('/show/{id}', [productsController::class, 'show'])->name('produsts.show');
+//商品情報登録画面送信ボタンのルーティング
+Route::post('/cerate', [productsController::class, 'registSubmit'])->name('submit');
+
+//詳細画面のルーティング
 Route::get('/detail/{id}', [productsController::class, 'detail'])->name('products.detail');
+
+//編集画面のルーティング
 Route::get('/edit/{id}', [productsController::class, 'edit'])->name('products.edit');
-Route::post('/cerate/store', [productsController::class, 'store'])->name('products.store');
+
+//編集更新のルーティング
+Route::POST('/edit/{id}', [productsController::class, 'update'])->name('update');
+
+//検索機能のルーティング
+Route::POST('/search', [productsController::class, 'search'])->name('search');
+
+//削除ボタンのルーティング
+Route::POST('/products/delete/{id}', [productsController::class, 'delete'])->name('delete');

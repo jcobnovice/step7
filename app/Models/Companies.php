@@ -16,4 +16,11 @@ class Companies extends Model
 
         return $companies;
     }
+
+    public function getCompanyList() {
+        
+        $companies = DB::table('companies')->get();
+
+        return $companies;
+    }
 }

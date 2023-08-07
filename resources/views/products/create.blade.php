@@ -11,13 +11,13 @@
     </div>
 
     <!-- form -->
-    <form method="post" action="{{ route('products.store') }}" enctype="multipart/form-data">
+    <form method="post" action="{{ route('submit') }}" enctype="multipart/form-data">
         @csrf
         
     <!-- 商品名 -->
         <div class="form-group">
             <label for="product_name">商品名</label>
-            <input type="product_name" class="form-control" id="product_name" name="product_name" value="{{ old('product_name')}}">
+            <input type="product_name" class="form-control" id="product_name" name="product_name" value="{{ old('product_name') }}">
             @if($errors->has('product_name'))
                 <p>{{ $errors->first('product_name') }}</p>
             @endif
@@ -27,14 +27,18 @@
             <label for="company_name">メーカー</label>
             <select class="form-control" id="company_name" name="company_name">
             @foreach ($companies as $company)
-                <option value="{{ $company->company_name }}">{{ $company->company_name }}</option>
+                <option hidden>選択してください</option>
+                <option value="{{ $company->id }}">{{ $company->company_name }}</option>
             @endforeach
             </select>
+            @if($errors->has('company_name'))
+                <p>{{ $errors->first('company_name') }}</p>
+            @endif
         </div>
     <!-- 価格 -->
         <div class="form-group">
             <label for="price">価格</label>
-            <input type="price" class="form-control" id="price" name="price" value="{{ old('price')}}">
+            <input type="price" class="form-control" id="price" name="price" value="{{ old('price') }}">
             @if($errors->has('price'))
                 <p>{{ $errors->first('price') }}</p>
             @endif
@@ -42,7 +46,7 @@
     <!-- 在庫数 -->
         <div class="form-group">
             <label for="stock">在庫数</label>
-            <input type="stock" class="form-control" id="stock" name="stock" value="{{ old('stock')}}">
+            <input type="stock" class="form-control" id="stock" name="stock" value="{{ old('stock') }}">
             @if($errors->has('stock'))
                 <p>{{ $errors->first('stock') }}</p>
             @endif
@@ -50,17 +54,18 @@
     <!-- コメント -->
         <div class="form-group">
             <label for="comment">コメント</label>
-            <input type="comment" class="form-control" id="comment" name="comment" value="{{ old('comment')}}">
+            <input type="comment" class="form-control" id="comment" name="comment" value="{{ old('comment') }}">
+            @if($errors->has('comment'))
+                <p>{{ $errors->first('comment') }}</p>
+            @endif
         </div>
     <!-- 商品画像 -->
         <div class="form-group">
             <label for="img_path">商品画像</label>
-            <input type="file" class="form-control" id="img_path" name="img_path" value="{{ old('img_path')}}">
-        </div>
+            <input type="file" class="form-control" id="img_path" name="img_path">
+        </div> 
 
-
-        <!-- input type="hidden" name="_token" value="{{csrf_token()}}" -->
-
+        
         <div class="form-group row mb-0">
             <div class="col-sm-12">
                 <button type="submit" class="btn btn-primary" style="margin:20px;">
@@ -70,4 +75,4 @@
         </div>
     </form>
 
-@stop
+@endsection
