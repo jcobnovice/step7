@@ -36,8 +36,6 @@ class ProductsController extends Controller
             // 登録処理呼び出し
             $products = new Products();
             $products -> registProducts($request);
-            $products -> save();
-            dd('aaa');
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
