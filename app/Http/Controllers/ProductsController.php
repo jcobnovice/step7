@@ -19,24 +19,31 @@ class ProductsController extends Controller
         $companies = $model->getList();
 
         return view('list' , ['products' => $products] , ['companies' => $companies]);
-        //$query = Products::query();
-        //全件取得
-        //$users = $query->get();
-        //ページネーション
-        //$products = $query->orderBy('id')->paginate(10);
-        //return view('list' , ['products' => $products]);
     }
 
     //登録処理
     public function registSubmit(ProductsRequest $request) {
+        
+        if($request->img_path){
+            $file_name = $request->file('img_path')->getClientOriginalName();
+            $request->file('img_path')->storeAs('public/sample/', $file_name);
+        }
+
         // トランザクション開始
         DB::beginTransaction();
     
         try {
             // 登録処理呼び出し
             $products = new Products();
-            $products -> registProducts($request);
+
+            if($request->img_path){
+                $products -> registProducts($request, $file_name);
+            } else {
+                $products -> registProductsOnly($request);
+            }
+            
             DB::commit();
+
         } catch (\Exception $e) {
             DB::rollback();
             return back();

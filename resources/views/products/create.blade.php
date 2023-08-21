@@ -62,7 +62,10 @@
     <!-- 商品画像 -->
         <div class="form-group">
             <label for="img_path">商品画像</label>
-            <input type="file" class="form-control" id="img_path" name="img_path">
+            <input type="file" class="form-control" id="img_path" name="img_path" accept="image/jpg,image/png">
+            @if($errors->has('img_path'))
+                <p>{{ $errors->first('img_path') }}</p>
+            @endif
         </div> 
 
         

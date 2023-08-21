@@ -40,7 +40,7 @@ Route::get('/edit/{id}', [productsController::class, 'edit'])->name('products.ed
 Route::POST('/edit/{id}', [productsController::class, 'update'])->name('update');
 
 //検索機能のルーティング
-Route::POST('/search', [productsController::class, 'search'])->name('search');
+Route::get('/search', [productsController::class, 'search'])->name('search');
 
 //削除ボタンのルーティング
 Route::POST('/products/delete/{id}', [productsController::class, 'delete'])->name('delete');

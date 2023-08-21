@@ -6,11 +6,11 @@
 <a href="{{ route('products.create') }}" class="btn btn-primary" style="margin:20px;">新規登録</a>
     
     <!-- 検索フォーム -->
-    <form action="{{ route('search') }}" method="POST">
-    <div class="search">
-            @csrf
+    <form action="{{ route('search') }}" method="GET">
+        @csrf
+    <div class="search">    
             <label for="product_name">{{ __('商品名') }}</label>
-            <input type="text" name="keyword" placeholder="キーワード">
+            <input type="text" name="keyword" placeholder="キーワード" value="{{ old('product_name') }}">
     </div>  
 
     <div class="company_name.serch">
@@ -19,7 +19,7 @@
         <select class="form-control" id="company_name" name="company_name">
             @foreach ($companies as $company)
                 <option hidden>選択してください</option>
-                <option value="{{ $company->company_name }}">{{ $company->company_name }}</option>
+                <option value="{{ $company->id }}">{{ $company->company_name }}</option>
             @endforeach
         </select>
     </div>
@@ -48,7 +48,7 @@
         @foreach ($products as $product)
             <tr>
                 <td>{{ $product->company_id }}</td>
-                <td><img src="{{asset('/storage/img/'.$product->img_path)}}" ait=""></td>
+                <td><img src="{{asset('/storage/sample/'.$product->img_path)}}" ait="" width="50" height="100"></td>
                 <td>{{ $product->product_name }}</td>
                 <td>{{ $product->price }}</td>
                 <td>{{ $product->stock }}</td>

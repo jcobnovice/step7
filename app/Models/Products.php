@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Products extends Model
 {
     use HasFactory;
-    protected $fillable = ['company_id', 'product_name', 'price', 'comment', 'created_at', 'updated_at'];
+    protected $fillable = ['company_id', 'product_name', 'price', 'comment', 'img_path', 'created_at', 'updated_at'];
 
     //一覧画面表示
     public function getList() {
@@ -35,34 +35,45 @@ class Products extends Model
     }
 
     //登録画面
-    public function registProducts($products){
-        //登録処理
-        //$path = 'storage/'. $file_name;
-            DB::table('products')->insert([
-                'product_name' => $products->product_name,
-                'company_id' => $products->company_name,
-                'price' => $products->price,
-                'stock' => $products->stock,
-                'comment' => $products->comment,
-                'created_at' => NOW(),
-                'updated_at'=> NOW(),
-            ]);
+    public function registProducts($products, $file_name){
+        //登録処理　画像あり
+        DB::table('products')->insert([
+            'product_name' => $products->product_name,
+            'company_id' => $products->company_name,
+            'price' => $products->price,
+            'stock' => $products->stock,
+            'comment' => $products->comment,
+            'img_path' => $file_name,
+            'created_at' => NOW(),
+            'updated_at'=> NOW(),
+        ]);
+    }
+    
+    public function registProductsOnly($products){
+        //登録処理　画像無し
+        DB::table('products')->insert([
+            'product_name' => $products->product_name,
+            'company_id' => $products->company_name,
+            'price' => $products->price,
+            'stock' => $products->stock,
+            'comment' => $products->comment,
+            'created_at' => NOW(),
+            'updated_at'=> NOW(),
+        ]);
     }
 
     //商品一覧画面の検索機能
-    public function searchList($keyword, $company_id){
-        $products = DB::table('products')
-        ->join('companies', 'company_id', '=', 'companies.id')
-        ->select('products.*', 'companies.company_name');
-        if($keyword){
-            $products -> where('products.product_name', 'like', '%'.$keyword.'%');
-        }
-        if($company_id){
-            $products -> where('products.company_id', '=', $company_id);
-        }
-        $products = $products -> get();
+    public function searchList($request){
+        $keyword = $request->input('keyword');
+        $company_id = $request->input('company_name');
+
+        $products=DB::table('products')
+           ->join('companies','company_id','=','companies.id')
+           ->select('products.*','companies.company_name')
+           ->where('products.product_name', 'like', '%'.$keyword.'%')
+           ->orwhere('products.company_id', '=', $company_id)
+           ->get();
 
         return $products;
     }
-
 }
