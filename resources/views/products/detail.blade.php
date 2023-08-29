@@ -19,13 +19,13 @@
             <tbody>
                 <tr>
                     <td>{{ $products->id }}</td>
-                    <td>{{ $products->img_path }}</td>
+                    <td><img src="{{asset('/storage/sample/'.$products->img_path)}}" ait="" width="50" height="100"></td>
                     <td>{{ $products->product_name }}</td>
                     <td>{{ $products->company_name }}</td>
                     <td>{{ $products->price }}</td>
                     <td>{{ $products->stock }}</td>
                     <td>{{ $products->comment }}</td>
-                    <td><a href="{{ route('products.edit', $products->id) }}" class="btn btn-primary">編集</a></td>
+                    <td><a href="{{ route('products.edit', ['id' => $products->id]) }}" class="btn btn-primary">編集</a></td>
                 </tr>
             </tbody>
         </table>

@@ -34,7 +34,7 @@ class Products extends Model
         return $products;
     }
 
-    //登録画面
+    //登録機能
     public function registProducts($products, $file_name){
         //登録処理　画像あり
         DB::table('products')->insert([
@@ -76,4 +76,37 @@ class Products extends Model
 
         return $products;
     }
+
+    //更新（編集）機能
+    public function updateProducts($products, $id, $file_name)
+    {
+        //更新処理　画像あり
+        DB::table('products')
+            ->where('id', '=', $id)
+            ->update([
+                'product_name' => $products->product_name,
+                'company_id' => $products->company_name,
+                'price' => $products->price,
+                'stock' => $products->stock,
+                'comment' => $products->comment,
+                'img_path' => $file_name,
+                'updated_at'=> NOW(),
+            ]);
+    }
+
+    public function updateProductsOnly($products, $id)
+    {
+        //更新処理　画像無し
+        DB::table('products')
+            ->where('id', '=', $id)
+            ->update([
+                'product_name' => $products->product_name,
+                'company_id' => $products->company_name,
+                'price' => $products->price,
+                'stock' => $products->stock,
+                'comment' => $products->comment,
+                'updated_at'=> NOW(),
+            ]);
+    }
+
 }

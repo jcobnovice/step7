@@ -54,10 +54,10 @@
                 <td>{{ $product->stock }}</td>
                 <td>{{ $product->company_name }}</td>
                 <td>
-                    <a href="{{ route('products.detail', $product->id) }}" class="btn btn-primary">詳細表示</a>
+                    <a href="{{ route('products.detail', ['id' => $product->id]) }}" class="btn btn-primary">詳細表示</a>
                 </td>
                 <td>
-                <form action="{{ route('delete', ['id'=>$product->id]) }}" method="POST">
+                <form action="{{ route('delete', ['id' => $product->id]) }}" method="POST">
                     @csrf
                     <input type="submit" class="btn btn-danger" value="削除" onclick='return confirm("本当に削除しますか？")'>
                 </form>

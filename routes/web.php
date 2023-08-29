@@ -35,9 +35,8 @@ Route::get('/detail/{id}', [productsController::class, 'detail'])->name('product
 
 //編集画面のルーティング
 Route::get('/edit/{id}', [productsController::class, 'edit'])->name('products.edit');
-
 //編集更新のルーティング
-Route::POST('/edit/{id}', [productsController::class, 'update'])->name('update');
+Route::POST('/edit/{id}', [productsController::class, 'updateSubmit'])->name('update');
 
 //検索機能のルーティング
 Route::get('/search', [productsController::class, 'search'])->name('search');
