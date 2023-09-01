@@ -36,7 +36,6 @@
                     <td>
                         <select class="form-control" id="company_name" name="company_name">
                         @foreach ($companies as $company)
-                            <option hidden>{{ $products->company_name }}</option>
                             <option value="{{ $company->id }}">{{ $company->company_name }}</option>
                         @endforeach
                         </select>
