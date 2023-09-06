@@ -65,14 +65,28 @@ class Products extends Model
     //商品一覧画面の検索機能
     public function searchList($request){
         $keyword = $request->input('keyword');
-        $company_id = $request->input('company_name');
+        $company = $request->input('company_name');
 
-        $products=DB::table('products')
-           ->join('companies','company_id','=','companies.id')
-           ->select('products.*','companies.company_name')
-           ->where('products.product_name', 'like', '%'.$keyword.'%')
-           ->orwhere('products.company_id', '=', $company_id)
-           ->get();
+        $products= DB::table('products')
+            ->join('companies','company_id','=','companies.id')
+            ->select('products.*','companies.company_name');
+
+        if($keyword){
+            $products->where('products.product_name', 'LIKE', '%'.$keyword.'%');
+        }
+
+        if($company){
+            $products->orwhere('products.company_id', '=', $company);
+        }   
+        
+        $products= $products->get();
+
+        // $products=DB::table('products')
+        //    ->join('companies','company_id','=','companies.id')
+        //    ->select('products.*','companies.company_name')
+        //    ->where('products.product_name', 'like', '%'.$keyword.'%')
+        //    ->orwhere('products.company_id', '=', $company_id)
+        //    ->get();
 
         return $products;
     }
