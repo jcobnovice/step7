@@ -17,7 +17,9 @@ class ProductsController extends Controller
         //インスタンス生成
         $model = new Products();
         $products = $model->getList();
-        $companies = $model->getList();
+
+        $article = new Companies();
+        $companies = $article->getCompanyList();
 
         return view('list' , ['products' => $products] , ['companies' => $companies]);
     }
