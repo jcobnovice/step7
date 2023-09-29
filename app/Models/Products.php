@@ -5,18 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Kyslik\ColumnSortable\Sortable;
 
 class Products extends Model
 {
     use HasFactory;
-    protected $fillable = ['company_id', 'product_name', 'price', 'comment', 'img_path', 'created_at', 'updated_at'];
+    use Sortable;
+    protected $fillable = ['company_id', 'product_name', 'price', 'stock', 'comment', 'img_path', 'created_at', 'updated_at'];
+    public $sortable = ['id', 'img_path', 'product_name', 'price', 'stock', 'company_name'];
 
     //一覧画面表示
     public function getList() {
         //productテーブルからデータを取得
         $products = DB::table('products')
         ->join('companies', 'company_id', '=', 'companies.id')
-        ->select('products.*', 'companies.company_name')
+        ->select('products.*', 'products.price', 'products.stock', 'companies.company_name')
         ->get();
 
         return $products;
@@ -66,27 +69,43 @@ class Products extends Model
     public function searchList($request){
         $keyword = $request->input('keyword');
         $company = $request->input('company_name');
+        $maxprice = $request->input('max_price');
+        $minprice = $request->input('min_price');
+        $maxstock = $request->input('max_stock');
+        $minstock = $request->input('min_stock');
 
         $products= DB::table('products')
             ->join('companies','company_id','=','companies.id')
             ->select('products.*','companies.company_name');
 
+        //商品名検索
         if($keyword){
             $products->where('products.product_name', 'LIKE', '%'.$keyword.'%');
         }
-
+        //メーカー名検索
         if($company){
-            $products->orwhere('products.company_id', '=', $company);
-        }   
+            $products->where('products.company_id', '=', $company);
+        }
+
+        //価格上限
+        if($maxprice){
+            $products->where('price','<',$maxprice);
+        }
+        //価格下限
+        if($minprice){
+            $products->where('price','>',$minprice);
+        }
+        
+        //在庫数上限
+        if($maxstock){
+            $products->where('stock','<',$maxstock);
+        }
+        //在庫数下限
+        if($minstock){
+            $products->where('stock','>',$minstock);
+        }
         
         $products= $products->get();
-
-        // $products=DB::table('products')
-        //    ->join('companies','company_id','=','companies.id')
-        //    ->select('products.*','companies.company_name')
-        //    ->where('products.product_name', 'like', '%'.$keyword.'%')
-        //    ->orwhere('products.company_id', '=', $company_id)
-        //    ->get();
 
         return $products;
     }

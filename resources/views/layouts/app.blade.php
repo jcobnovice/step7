@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -76,5 +77,40 @@
             @yield('content')
         </main>
     </div>
+    <script>
+        $(document).ready(function(){
+            $("#serachbutton").on('click',function(e){
+            e.preventDefault()
+            let company_name = $('#company_name').val()
+            console.log(company_name)
+            let keyword = $('#keyword').val()
+            console.log(keyword)
+            let max_price = $('#max_price').val()
+            console.log(max_price)
+            let min_price = $('#min_price').val()
+            console.log(min_price)
+            let max_stock = $('#max_stock').val()
+            console.log(max_stock)
+            let min_stock = $('#min_stock').val()
+            console.log(min_stock)
+            
+            $.ajax({
+                type:"GET",
+                url:"{{ route('search') }}",
+                dataType: 'html',
+                data: {'company_name': company_name, 'keyword': keyword, 'max_price': max_price, 'min_price': min_price, 'max_stock': max_stock, 'min_stock': min_stock}
+            })   
+            .done(function(data){
+                let newtable=$(data).find('.productstable')
+                $('.productstable').html(newtable)
+                alert('ajax成功')
+            })
+            .fail(function(){
+                alert('ajax失敗')
+            })
+        });
+        })
+        
+    </script>
 </body>
 </html>

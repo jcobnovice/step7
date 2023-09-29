@@ -14,6 +14,7 @@ class ProductsController extends Controller
     //一覧画面表示
     public function index()
     {
+        $posts = Products::sortable()->get();
         //インスタンス生成
         $model = new Products();
         $products = $model->getList();
@@ -21,7 +22,7 @@ class ProductsController extends Controller
         $article = new Companies();
         $companies = $article->getCompanyList();
 
-        return view('list' , ['products' => $products] , ['companies' => $companies]);
+        return view('list' , ['products' => $products] , ['companies' => $companies])->with('posts', $posts);
     }
 
     //登録処理
