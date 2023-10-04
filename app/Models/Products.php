@@ -5,14 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Kyslik\ColumnSortable\Sortable;
 
 class Products extends Model
 {
     use HasFactory;
-    use Sortable;
     protected $fillable = ['company_id', 'product_name', 'price', 'stock', 'comment', 'img_path', 'created_at', 'updated_at'];
-    public $sortable = ['id', 'img_path', 'product_name', 'price', 'stock', 'company_name'];
 
     //一覧画面表示
     public function getList() {

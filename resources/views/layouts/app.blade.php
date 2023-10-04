@@ -16,6 +16,7 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/js/jquery.tablesorter.min.js"></script>
 </head>
 <body>
     <div id="app">
@@ -78,6 +79,21 @@
         </main>
     </div>
     <script>
+        //ソート機能
+        $(function() {
+            $('#sorter').tablesorter({
+                headers: {
+                    0: { sorter: "digit"},
+                    1: { sorter: "false"},
+                    2: { sorter: "text"},
+                    3: { sorter: "digit"},
+                    4: { sorter: "digit"},
+                    5: { sorter: "text"}
+                }
+            });
+        });
+
+        //検索機能の非同期処理化
         $(document).ready(function(){
             $("#serachbutton").on('click',function(e){
             e.preventDefault()
