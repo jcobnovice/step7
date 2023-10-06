@@ -127,6 +127,33 @@
         });
         })
         
+        //削除処理の非同期処理化
+        $(function(){
+            $(".deletebutton").click(function(e){
+            e.preventDefault();
+            let dele=window.confirm("削除しますか？");
+            if(dele){
+                let productsid=$(this).attr('data-id');
+                console.log(productsid);
+                let clickbutton=$(this)
+
+                $.ajax({
+                    headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+                    type:"POST",
+                    url:'products/delete/'+productsid,
+                    dataType: 'html',
+                    data: { "id": productsid, "_method": "DELETE" } 
+                })
+                .done(function(data){
+                clickbutton.parents('tr').remove()
+                alert('ajax成功')
+                })
+                .fail(function(){
+                alert('ajax失敗')
+            })
+            }
+            })
+        });
     </script>
 </body>
 </html>

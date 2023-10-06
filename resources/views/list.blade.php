@@ -85,9 +85,10 @@
                 <td>
                     <form action="{{ route('delete', ['id' => $product->id]) }}" method="POST">
                     @csrf
-                        <input type="submit" class="btn btn-danger" value="削除" onclick='return confirm("本当に削除しますか？")'>
+                        <input type="submit" class="btn btn-danger deletebutton" value="削除" data-id="{{ $product->id }}">
                     </form>
                 </td>
+            </tr>
         @endforeach
         </tbody>
     <table>

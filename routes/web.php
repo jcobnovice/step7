@@ -42,4 +42,4 @@ Route::POST('/edit/{id}', [productsController::class, 'updateSubmit'])->name('up
 Route::get('/search', [productsController::class, 'search'])->name('search');
 
 //削除ボタンのルーティング
-Route::POST('/products/delete/{id}', [productsController::class, 'delete'])->name('delete');
+Route::DELETE('/products/delete/{id}', [productsController::class, 'delete'])->name('delete');
